@@ -1073,7 +1073,16 @@ h2{
 }
 .timeline-item{
     padding: 20px;
+.star{
+
+        animation: twinkle 5s ease-in-out infinite;
+
+        box-shadow:none;
+
+    }
+    
 }
+
 @keyframes floatImage{
 
     0%{

@@ -65,57 +65,45 @@ revealOnScroll();
 
 const starsContainer = document.querySelector(".stars");
 
-const STAR_COUNT = 180;
+// ลดจำนวนดาวบนมือถือ
+const STAR_COUNT = window.innerWidth <= 768 ? 60 : 180;
 
-for(let i = 0; i < STAR_COUNT; i++){
+for (let i = 0; i < STAR_COUNT; i++) {
 
     const star = document.createElement("span");
-
     star.className = "star";
 
-    const size = Math.random()*3.5+0.8;
+    const size = Math.random() * 2.8 + 0.8;
 
-    star.style.width = size+"px";
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.opacity = 0.4 + Math.random() * 0.6;
 
-    star.style.height = size+"px";
-
-    star.style.left = Math.random()*100+"%";
-
-    star.style.top = Math.random()*100+"%";
-
-    star.style.opacity = 0.3 + Math.random()*0.7;
-
+    // มือถือกระพริบช้าลง
     star.style.animationDuration =
-        (2+Math.random()*6)+"s";
+        (window.innerWidth <= 768 ? 6 : 2 + Math.random() * 6) + "s";
 
     star.style.animationDelay =
-        (Math.random()*8)+"s";
+        (Math.random() * 8) + "s";
 
-    /* สีดาว */
-
-    if(Math.random()>0.92){
-
+    if (Math.random() > 0.92) {
         star.style.background =
-        "radial-gradient(circle,#bfdbfe,#60a5fa 70%,transparent)";
-
-    }else{
-
+            "radial-gradient(circle,#bfdbfe,#60a5fa 70%,transparent)";
+    } else {
         star.style.background =
-        "radial-gradient(circle,#ffffff,#dbeafe 70%,transparent)";
-
+            "radial-gradient(circle,#fff,#dbeafe 70%,transparent)";
     }
 
-    /* ดาวใหญ่พิเศษ */
+    // ดาวใหญ่เฉพาะ Desktop
+    if (window.innerWidth > 768 && Math.random() > 0.97) {
 
-    if(Math.random()>0.97){
+        star.style.width = "6px";
+        star.style.height = "6px";
 
-        star.style.width="6px";
-
-        star.style.height="6px";
-
-        star.style.boxShadow=
-        "0 0 20px #fff,0 0 35px #60a5fa";
-
+        star.style.boxShadow =
+            "0 0 18px #fff,0 0 30px #60a5fa";
     }
 
     starsContainer.appendChild(star);
